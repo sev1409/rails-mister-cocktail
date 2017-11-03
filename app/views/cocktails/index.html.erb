@@ -1,2 +1,14 @@
-<h1>Cocktail#index</h1>
-<p>Find me in app/views/cocktail/index.html.erb</p>
+<h1 class="text-center">Miss Cocktail</h1>
+
+<div class="text-center padded">
+  <%= link_to "Create a cocktail", new_cocktail_path, class: 'btn btn-danger' %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+      <p><%= link_to cocktail.name.capitalize, cocktail_path(cocktail) %></p>
+    <% end %>
+  </div>
+</div>
+

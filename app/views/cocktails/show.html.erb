@@ -1,2 +1,34 @@
-<h1>Cocktail#show</h1>
-<p>Find me in app/views/cocktail/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h1 class="text-center"><%= @cocktail.name.capitalize %></h1>
+      <p class="text-center"><%= @cocktail.description %></p>
+
+      <ul class="list-unstyled">
+        Cocktail Recipe:
+        <% @cocktail.doses.each do |dose| %>
+          <li><%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> : <%= dose.description %>
+            <%= link_to "<i class='fa fa-trash-o'></i>".html_safe, dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %></li>
+        <% end %>
+      </ul>
+
+      <p class="text-center">Add a Dose</p>
+
+      <% if @dose.errors.any? %>
+        <ul>
+          <% @dose.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= simple_form_for([@cocktail, @dose]) do |f| %>
+        <%= f.input :description, placeholder: '2 tbs' %>
+        <%= f.input :ingredient_id, collection: @ingredients %>
+        <%= f.submit class: "btn btn-danger" %>
+      <% end %>
+
+      <%= link_to "<i class='fa fa-arrow-circle-left'></i>".html_safe, cocktails_path %>
+    </div>
+  </div>
+</div>
