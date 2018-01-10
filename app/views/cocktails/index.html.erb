@@ -1,14 +1,28 @@
-<h1 class="text-center">Miss Cocktail</h1>
+<div class="banner-home" style="background-image: linear-gradient(rgba(0,0,0,0) 50%, rgba(0, 0, 0,0) 50%), url(<%= image_path 'background.jpg' %>);">
+  <h1>Likor</h1>
+  <h2>Choose One, Make yours</h2>
+  <%= link_to "Create a cocktail", new_cocktail_path, class: 'btn-index' %>
 
-<div class="text-center padded">
-  <%= link_to "Create a cocktail", new_cocktail_path, class: 'btn btn-danger' %>
 </div>
 
-<div class="container">
-  <div class="row">
-    <% @cocktails.each do |cocktail| %>
-      <p><%= link_to cocktail.name.capitalize, cocktail_path(cocktail) %></p>
-    <% end %>
+<div class="parallax">
+  <div class="container">
+        <div class="card-container">
+          <% @cocktails.each do |cocktail| %>
+          <div class="card">
+            <div class="card-name">
+              <%= link_to cocktail.name.capitalize, cocktail_path(cocktail)%>
+            </div>
+            <div class="card-image">
+              <%= cl_image_tag cocktail.photo.path, width: 200, height: 300, crop: :fill %>
+            </div>
+          </div>
+        <% end %>
+        </div>
   </div>
 </div>
+
+
+
+
 

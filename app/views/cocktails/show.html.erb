@@ -1,34 +1,45 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-      <h1 class="text-center"><%= @cocktail.name.capitalize %></h1>
-      <p class="text-center"><%= @cocktail.description %></p>
+<div class="main-container">
+  <!-- <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3"> -->
+      <div class="show-container">
+        <div class="text-container">
+        <h1 class="text-center"><%= @cocktail.name.capitalize %></h1>
+        <p class="text-center"><%= @cocktail.description %></p>
+</div>
 
-      <ul class="list-unstyled">
-        Cocktail Recipe:
-        <% @cocktail.doses.each do |dose| %>
-          <li><%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> : <%= dose.description %>
-            <%= link_to "<i class='fa fa-trash-o'></i>".html_safe, dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %></li>
-        <% end %>
-      </ul>
+   <!--  </div>
+  </div> -->
 
-      <p class="text-center">Add a Dose</p>
+<div class="dose-container">
 
+  <ul class="list-unstyled">
+    <% @cocktail.doses.each do |dose| %>
+  <li><%= link_to dose.ingredient.name, ingredient_path(dose.ingredient) %> : <%= dose.description %>
+      <%= link_to "<i class='fa fa-trash-o'></i>".html_safe, dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %></li>
+    <% end %>
+  </ul>
+    <p class="text-center">Add a Dose</p>
       <% if @dose.errors.any? %>
-        <ul>
-          <% @dose.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+  <ul>
+      <% @dose.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
+  </ul>
+    <% end %>
+    <%= simple_form_for([@cocktail, @dose]) do |f| %>
+      <%= f.input :description, placeholder: '2 tbs' %>
+      <%= f.input :ingredient_id, collection: @ingredients %>
+      <%= f.submit class: "btn-show" %>
+    <% end %>
+</div>
+    <%= link_to "<i class='fa fa-arrow-circle-left'></i>".html_safe, cocktails_path %>
 
-      <%= simple_form_for([@cocktail, @dose]) do |f| %>
-        <%= f.input :description, placeholder: '2 tbs' %>
-        <%= f.input :ingredient_id, collection: @ingredients %>
-        <%= f.submit class: "btn btn-danger" %>
-      <% end %>
+</div>
 
-      <%= link_to "<i class='fa fa-arrow-circle-left'></i>".html_safe, cocktails_path %>
-    </div>
+<div class="image-container">
+  <div class="image">
+    <%= cl_image_tag @cocktail.photo.path, width: 500, height: 700 %>
   </div>
 </div>
+</div>
+

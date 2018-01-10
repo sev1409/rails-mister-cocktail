@@ -1,0 +1,33 @@
+.btn-show {
+  color: black;
+  font-weight: lighter;
+  border-radius: 15px;
+  border: 1px solid black;
+  padding: 5px 10px;
+
+}
+.btn-show:hover {
+  color: #4c4848;
+}
+
+.fa {
+  position: absolute;
+  top: 10px;
+}
+
+.btn-index {
+  color: white;
+  font-weight: lighter;
+  border-radius: 15px;
+  border: 1px solid white;
+  padding: 5px 10px;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+}
+
+.btn-index:hover {
+  color: black;
+  background-color: white;
+  font-weight: bold;
+}
